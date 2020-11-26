@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <div class="container">
+        <div class="menu">
+            <button mat-button [matMenuTriggerFor]="menu">
+                <span>{{toolName | async}}</span>
+                <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let tool of tools" [routerLink]="tool.path" routerLinkActive="active">{{tool.name}}</button>
+            </mat-menu>
+        </div>
+        <div>
+            <span>Welcome to {{title}}</span>
+        </div>
+        <div>
+            User Account
+        </div>
+    </div>
+</mat-toolbar>
