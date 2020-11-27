@@ -12,16 +12,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatGridListModule } from "@angular/material/grid-list";
 import { ModelContentComponent } from './model-content/model-content.component';
 import { ServiceContentComponent } from './service-content/service-content.component';
 import { ContextContentComponent } from './context-content/context-content.component';
+import { ModelTreeComponent } from './model-tree/model-tree.component';
 @NgModule({
   declarations: [
     AppComponent,
     MainNavBarComponent,
     ModelContentComponent,
     ServiceContentComponent,
-    ContextContentComponent
+    ContextContentComponent,
+    ModelTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { ContextContentComponent } from './context-content/context-content.compo
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTreeModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

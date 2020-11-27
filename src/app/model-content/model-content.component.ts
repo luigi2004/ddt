@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Model } from '../model';
 
 @Component({
   selector: 'app-model-content',
@@ -9,7 +10,11 @@ export class ModelContentComponent implements OnInit {
 
   constructor() { }
 
+  models!: Model[];
+  
+
   ngOnInit(): void {
+    this.models = [];
   }
 
 }

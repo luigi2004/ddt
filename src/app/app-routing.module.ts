@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: 'model', component: ModelContentComponent},
   {path: 'service', component: ServiceContentComponent},
   {path: 'context', component: ContextContentComponent},
-  {path: '', redirectTo: '/model', pathMatch: 'full'}
+  {path: '', redirectTo: '/context', pathMatch: 'full'}
 ];
 
 @NgModule({

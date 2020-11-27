@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Context } from '../context';
 
 @Component({
   selector: 'app-context-content',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ContextContentComponent implements OnInit {
 
   constructor() { }
-
+  contexts: Context[] =[];
   ngOnInit(): void {
   }
 
