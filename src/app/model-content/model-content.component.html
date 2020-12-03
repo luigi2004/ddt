@@ -1,8 +1,9 @@
 <mat-sidenav-container>
     <mat-sidenav mode="side" opened>
         <app-model-tree [data]="models"></app-model-tree>
+        <button (click)="newModel()">Add New Model</button>
     </mat-sidenav>
     <mat-sidenav-content>
-        Test the contents
+        <app-model-editor></app-model-editor>
     </mat-sidenav-content>
 </mat-sidenav-container>

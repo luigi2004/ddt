@@ -11,10 +11,17 @@ export class ModelContentComponent implements OnInit {
   constructor() { }
 
   models!: Model[];
-  
+  selectedModel!:Model;
 
   ngOnInit(): void {
     this.models = [];
+  }
+
+  newModel() {
+    let model = {name: "Testing New model",properties: []}
+    // this.models.push(model);
+    this.selectedModel = model;
+    console.log("new model named: ",model.name);
   }
 
 }

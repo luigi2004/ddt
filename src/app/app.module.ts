@@ -13,11 +13,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { ModelContentComponent } from './model-content/model-content.component';
 import { ServiceContentComponent } from './service-content/service-content.component';
 import { ContextContentComponent } from './context-content/context-content.component';
 import { ModelTreeComponent } from './model-tree/model-tree.component';
+import { ModelEditorComponent } from './model-editor/model-editor.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +30,8 @@ import { ModelTreeComponent } from './model-tree/model-tree.component';
     ModelContentComponent,
     ServiceContentComponent,
     ContextContentComponent,
-    ModelTreeComponent
+    ModelTreeComponent,
+    ModelEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,9 @@ import { ModelTreeComponent } from './model-tree/model-tree.component';
     MatListModule,
     MatMenuModule,
     MatTreeModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,19 @@
+<div>
+    <mat-form-field *ngIf="isEdit;else notEditName">
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+    <ng-template #notEditName>
+        <h1>{{model.name}}</h1>
+    </ng-template>
+
+</div>
+<form class="example-form" *ngIf="isEdit; else notEditContent">
+    <mat-form-field>
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+</form>
+<ng-template #notEditContent>
+
+</ng-template>
