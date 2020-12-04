@@ -1,24 +1,22 @@
-html,
-body {
-    margin: 0;
-    padding: 0
-}
-
 .container {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 100
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+
 }
 
 .main {
-    height: 90%;
+  flex: 1 1 auto;
 }
 
-.top,
-bottom {
-    height: 5%;
+.top {
+  flex: 0 1 auto;
+}
+
+.bottom {
+  flex: 0 1 auto;
 }
