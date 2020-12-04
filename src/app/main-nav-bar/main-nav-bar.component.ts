@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { from, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { GlobalService } from '../global-service.service'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-nav-bar',
@@ -28,10 +29,11 @@ export class MainNavBarComponent {
 
   @Input('title') title: string | undefined;
 
-  constructor(private breakpointObserver: BreakpointObserver, private gs:GlobalService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private gs:GlobalService, private router: Router) {}
   
-  toolChangeEvent(name:string) {
-    this.gs.setSelectedTool(name);
+  toolChangeEvent(tool:Modes) {
+    this.gs.setSelectedTool(tool.name);
+    this.router.navigate([tool.path]);
   }
 
   isTool(name: string): boolean {
@@ -42,6 +44,10 @@ export class MainNavBarComponent {
 
   pathFromName(name: string): string {
     return "/" + name;
+  }
+
+  getTools() {
+    return this.tools.filter((mode)=> !this.isTool(mode.name));
   }
 }
 

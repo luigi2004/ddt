@@ -35,6 +35,13 @@ export class ModelTreeComponent implements OnInit {
 
   @Input()
   data: Model[] = [];
+  selectedModel!:Model;
+  newModel() {
+    let model = {name: "Testing New model",properties: []}
+    // this.models.push(model);
+    this.selectedModel = model;
+    console.log("new model named: ",model.name);
+  }
 
 }
 

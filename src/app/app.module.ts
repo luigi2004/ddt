@@ -21,6 +21,7 @@ import { ServiceContentComponent } from './service-content/service-content.compo
 import { ContextContentComponent } from './context-content/context-content.component';
 import { ModelTreeComponent } from './model-tree/model-tree.component';
 import { ModelEditorComponent } from './model-editor/model-editor.component';
+import { FooterBarComponent } from './footer-bar/footer-bar.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ModelEditorComponent } from './model-editor/model-editor.component';
     ServiceContentComponent,
     ContextContentComponent,
     ModelTreeComponent,
-    ModelEditorComponent
+    ModelEditorComponent,
+    FooterBarComponent
   ],
   imports: [
     BrowserModule,
