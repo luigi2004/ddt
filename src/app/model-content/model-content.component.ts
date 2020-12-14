@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Model } from '../model';
+import { Model } from '../tools/model.tool';
 
 @Component({
   selector: 'app-model-content',

@@ -3,7 +3,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { from, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { GlobalService } from '../global-service.service'
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
+import { tools } from '../tools/registered.tool';
+import { Tool } from '../tools/tool';
 
 @Component({
   selector: 'app-main-nav-bar',
@@ -19,27 +21,20 @@ export class MainNavBarComponent {
       shareReplay()
     );
 
-  toolName: Observable<string> = this.gs.getSelectedTool();
-
-  tools:Array<Modes> = [
-    { name: "Model",path: "/model"},
-    { name: "Service", path: "/service"},
-    { name: "Context", path: "/context"}
-  ]
+  toolName: string = this.gs.getSelectedTool();
 
   @Input('title') title: string | undefined;
 
   constructor(private breakpointObserver: BreakpointObserver, private gs:GlobalService, private router: Router) {}
   
-  toolChangeEvent(tool:Modes) {
+  toolChangeEvent(tool:Tool) {
     this.gs.setSelectedTool(tool.name);
-    this.router.navigate([tool.path]);
+    this.toolName =tool.name;
+    this.router.navigate([tool.name.toLowerCase()]);
   }
 
   isTool(name: string): boolean {
-    let s;
-    this.toolName.subscribe(data=>s = data);
-    return s === name;
+    return this.toolName === name;
   }
 
   pathFromName(name: string): string {
@@ -47,11 +42,6 @@ export class MainNavBarComponent {
   }
 
   getTools() {
-    return this.tools.filter((mode)=> !this.isTool(mode.name));
+    return tools.filter((tool)=> !this.isTool(tool.name));
   }
-}
-
-interface Modes {
-  name: string;
-  path: string;
 }

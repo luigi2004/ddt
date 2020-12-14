@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, scheduled, Subject } from 'rxjs';
-import { Context } from './context';
-import { Model } from './model';
-import { Service } from './service';
+import { tools } from './tools/registered.tool';
+import { Model } from './tools/model.tool';
+import { ContextDef } from './tools/context.tool';
+import { ServiceDef } from './tools/service.tool';
+import { Tool } from './tools/tool';
+import { Router } from '@angular/router';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +14,27 @@ import { Service } from './service';
 export class GlobalService {
 
 
-  constructor() {  }
-
-  private selectedToolName: BehaviorSubject<string> = new BehaviorSubject("Model");
-  private selectedModel: Model = { name: "", properties: []};
-  private selectedContext: Context = {name:""};
-  private selectedService: Service = {};
+  constructor(private route:Router) {  }
   
-  getSelectedTool(): Observable<string> {
-    return this.selectedToolName.asObservable();
+  private selectedTool: Tool = tools.filter(tool=>tool.name==="model")[0];
+  private selectedModel: Model | undefined;
+  private selectedContext: ContextDef | undefined;
+  private selectedService: ServiceDef | undefined;
+  
+  getSelectedTool(): string {
+    
+    return this.selectedTool.name;
   }
 
   setSelectedTool(name:string) {
-    this.selectedToolName.next(name);
+    this.selectedTool = tools.filter(tool=>tool.name===name)[0];
+  }
+
+  getSelectedModel() {
+    if(this.selectedModel != undefined){
+      return this.selectedModel;
+    } else {
+      return null;
+    }
   }
 }

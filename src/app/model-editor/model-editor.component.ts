@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Model } from '../model';
+import { GlobalService } from '../global-service.service';
+import { Model } from '../tools/model.tool';
 
 @Component({
   selector: 'app-model-editor',
@@ -8,9 +9,9 @@ import { Model } from '../model';
 })
 export class ModelEditorComponent implements OnInit {
 
-  isEdit: boolean = false;
+  isEdit: boolean = this.gs.getSelectedModel() != null;
   model: Model = { name: "", properties:[] }
-  constructor() { }
+  constructor(private gs:GlobalService) { }
 
   ngOnInit(): void {
   }
