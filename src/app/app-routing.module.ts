@@ -11,7 +11,7 @@ const routes: Routes =
   {path: 'model', component: ModelContentComponent},
   {path: 'service', component: ServiceContentComponent},
   {path: 'context', component: ContextContentComponent},
-  {path: '', redirectTo: '/context', pathMatch: 'full'}
+  {path: '', redirectTo: '/model', pathMatch: 'full'}
 ];
 
 

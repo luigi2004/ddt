@@ -22,6 +22,7 @@ import { ContextContentComponent } from './context-content/context-content.compo
 import { ModelTreeComponent } from './model-tree/model-tree.component';
 import { ModelEditorComponent } from './model-editor/model-editor.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatToolbarModule,
     LayoutModule,
     MatButtonModule,

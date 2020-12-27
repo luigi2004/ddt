@@ -4,7 +4,7 @@ import { Tool } from './tool';
 
 export interface Model {
     name: string;
-    properties: Model[];
+    properties: Model[] | undefined;
 }
 
 export class ModelTool implements Tool {

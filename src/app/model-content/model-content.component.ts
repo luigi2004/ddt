@@ -11,10 +11,29 @@ export class ModelContentComponent implements OnInit {
   constructor() { }
 
   models!: Model[];
-  selectedModel!:Model;
+  selectedModel:Model |  undefined;
+  isEditing!: boolean;
 
   ngOnInit(): void {
     this.models = [];
+  }
+
+  onModelSelected(event: Model) {
+    console.log("The event: ", event);
+    this.selectedModel = event;
+  }
+
+  onModelSave(event: Model){
+    console.log("Models: ",this.models);
+    this.models.push(event);
+  }
+
+  onEdit(event: boolean){
+    this.isEditing = event;
+  }
+
+  onNewModel(event: Model) {
+    this.models.push(event);
   }
 
   

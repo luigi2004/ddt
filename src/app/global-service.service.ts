@@ -16,7 +16,7 @@ export class GlobalService {
 
   constructor(private route:Router) {  }
   
-  private selectedTool: Tool = tools.filter(tool=>tool.name==="model")[0];
+  private selectedTool: Tool = tools.filter(tool=>tool.name==="Model")[0];
   private selectedModel: Model | undefined;
   private selectedContext: ContextDef | undefined;
   private selectedService: ServiceDef | undefined;
@@ -36,5 +36,9 @@ export class GlobalService {
     } else {
       return null;
     }
+  }
+
+  addData(data: any){
+    this.selectedTool.data.push(data);
   }
 }

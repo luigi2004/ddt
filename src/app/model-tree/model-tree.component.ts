@@ -1,5 +1,5 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { Model } from '../tools/model.tool';
 
@@ -9,10 +9,10 @@ import { Model } from '../tools/model.tool';
   styleUrls: ['./model-tree.component.scss']
 })
 export class ModelTreeComponent implements OnInit {
-  private _transformer = (node: Model, level: number): Node => {
+  private _transformer = (model: Model, level: number): Node => {
     return {
-      expandable: !!node.properties && node.properties.length > 0,
-      name: node.name,
+      expandable: !!model.properties && model.properties.length > 0,
+      name: model.name,
       level: level,
     };
   }
@@ -35,12 +35,14 @@ export class ModelTreeComponent implements OnInit {
 
   @Input()
   data: Model[] = [];
-  selectedModel!:Model;
+  @Output()
+  selectedModel: EventEmitter<Model> = new EventEmitter<Model>();
+  @Output()
+  newModelRequest: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   newModel() {
-    let model = {name: "Testing New model",properties: []}
-    // this.models.push(model);
-    this.selectedModel = model;
-    console.log("new model named: ",model.name);
+    console.log("Adding new");
+    this.newModelRequest.emit(true);
   }
 
 }
