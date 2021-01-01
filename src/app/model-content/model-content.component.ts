@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../global-service.service';
 import { Model } from '../tools/model.tool';
 
 @Component({
@@ -8,32 +9,31 @@ import { Model } from '../tools/model.tool';
 })
 export class ModelContentComponent implements OnInit {
 
-  constructor() { }
-
-  models!: Model[];
-  selectedModel:Model |  undefined;
   isEditing!: boolean;
+  isNew = false;
+
+  constructor(private gs: GlobalService) { }
 
   ngOnInit(): void {
-    this.models = [];
   }
 
   onModelSelected(event: Model) {
-    console.log("The event: ", event);
-    this.selectedModel = event;
+    this.gs.setActive(event);
+    console.log("Selected: ", event);
+
   }
 
   onModelSave(event: Model){
-    console.log("Models: ",this.models);
-    this.models.push(event);
+    
   }
 
   onEdit(event: boolean){
     this.isEditing = event;
+    console.log("IsEditing:",this.isEditing);
   }
 
-  onNewModel(event: Model) {
-    this.models.push(event);
+  onNewModel(event: boolean) {
+    this.isNew = true;
   }
 
   

@@ -5,6 +5,7 @@ import { ContextDef } from './tools/context.tool';
 import { ServiceDef } from './tools/service.tool';
 import { Tool } from './tools/tool';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 
@@ -17,9 +18,7 @@ export class GlobalService {
   constructor(private route:Router) {  }
   
   private selectedTool: Tool = tools.filter(tool=>tool.name==="Model")[0];
-  private selectedModel: Model | undefined;
-  private selectedContext: ContextDef | undefined;
-  private selectedService: ServiceDef | undefined;
+  
   
   getSelectedTool(): string {
     
@@ -30,15 +29,20 @@ export class GlobalService {
     this.selectedTool = tools.filter(tool=>tool.name===name)[0];
   }
 
-  getSelectedModel() {
-    if(this.selectedModel != undefined){
-      return this.selectedModel;
-    } else {
-      return null;
-    }
+  getActive(){
+    return this.selectedTool.active;
   }
 
-  addData(data: any){
-    this.selectedTool.data.push(data);
+  setActive(active: any){
+    this.selectedTool.active = active;
   }
+
+  getData(): Observable<any[]> {
+    return this.selectedTool.data.asObservable();
+  }
+
+  add(item: any){
+    this.selectedTool.data.next(item);
+  }
+
 }

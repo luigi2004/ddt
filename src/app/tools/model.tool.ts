@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Tool } from './tool';
 
 
@@ -10,5 +11,5 @@ export interface Model {
 export class ModelTool implements Tool {
     name: string = "Model";
     active: Model | undefined;
-    data: Model[] = [];
+    data = new Subject<Model[]>();
 }

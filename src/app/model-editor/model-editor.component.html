@@ -1,5 +1,5 @@
-<div *ngIf="!edit; else EditName">
-    <h1>{{getName()}}</h1>
+<div *ngIf="!isEdit; else EditName">
+    <h1>{{name}}</h1>
 </div>
 <ng-template #EditName>
     <mat-form-field>

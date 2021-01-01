@@ -1,8 +1,8 @@
 <mat-sidenav-container>
     <mat-sidenav mode="side" opened>
-        <app-model-tree [data]="models" (selectedModel)="onModelSelected($event)" (newModelRequest)="onEdit($event)"></app-model-tree>
+        <app-model-tree (selectedModel)="onModelSelected($event)" (newModelRequest)="onNewModel($event)"></app-model-tree>
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-model-editor [model]="selectedModel" [(edit)]="isEditing" (modelChange)="onModelSave($event)"></app-model-editor>
+        <app-model-editor (modelChange)="onModelSave($event)"></app-model-editor>
     </mat-sidenav-content>
 </mat-sidenav-container>

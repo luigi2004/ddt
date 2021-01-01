@@ -9,39 +9,28 @@ import { Model } from '../tools/model.tool';
 })
 export class ModelEditorComponent implements OnInit {
 
-  @Input()
-  model: Model | undefined;
-  @Input()
-  edit: boolean = false;
+
+  isEdit = false;
   @Output()
   modelChange: EventEmitter<Model> = new EventEmitter<Model>();
   @Output()
   editChange:EventEmitter<boolean> = new EventEmitter<boolean>();
-  name: string = "";
-  props: Model[] = [];
-
+  name: string | undefined;
+  props: Model[] | undefined;
   
 
-  constructor(private gs:GlobalService) { }
+  constructor(private gs: GlobalService) { }
 
   ngOnInit(): void {
+    const model = this.gs.getActive();
+    this.name = model?.name;
+    this.props = model?.properties;
+
   }
 
   save(): void {
-    if(this.model === undefined){
-      console.log("adding new model with name:", this.name);
-      this.model = { name: this.name, properties: [] } as Model;
-    }
-    console.log("Model info:", this.model);
-    this.modelChange.emit(this.model);
-    this.edit = false;
-  }
-
-  getName(): string {
-    if (this.model) {
-      return this.model.name;
-    }
-    return 'Select Model';
+    if(this.name !== undefined)
+      this.modelChange.emit({name: this.name, properties:[]});
   }
 
 }

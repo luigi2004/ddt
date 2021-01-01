@@ -1,6 +1,7 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { Observable } from 'rxjs';
 import { Model } from '../tools/model.tool';
 
 @Component({
@@ -28,13 +29,13 @@ export class ModelTreeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.data = this.data;
+    this.data.subscribe(models=>this.dataSource.data = models);
   }
 
   hasChild = (_: number, node: Node) => node.expandable;
 
   @Input()
-  data: Model[] = [];
+  data!: Observable<Model[]>;
   @Output()
   selectedModel: EventEmitter<Model> = new EventEmitter<Model>();
   @Output()
