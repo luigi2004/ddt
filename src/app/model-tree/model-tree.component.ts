@@ -2,47 +2,50 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { Observable } from 'rxjs';
+import { GlobalService } from '../global-service.service';
 import { Model } from '../tools/model.tool';
 
+function transformer(model: Model, level: number): Node {
+  return {
+    expandable: !!model.properties && model.properties.length > 0,
+    name: model.name,
+    level,
+  };
+}
 @Component({
   selector: 'app-model-tree',
   templateUrl: './model-tree.component.html',
   styleUrls: ['./model-tree.component.scss']
 })
 export class ModelTreeComponent implements OnInit {
-  private _transformer = (model: Model, level: number): Node => {
-    return {
-      expandable: !!model.properties && model.properties.length > 0,
-      name: model.name,
-      level: level,
-    };
-  }
+
+  @Output()
+  selectedModel: EventEmitter<Model> = new EventEmitter<Model>();
+
+  @Output()
+  newModelRequest: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   treeControl = new FlatTreeControl<Node>(node => node.level, node => node.expandable);
 
-  treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.properties);
+  treeFlattener = new MatTreeFlattener(transformer, node => node.level, node => node.expandable, node => node.properties);
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor() {
-    
+
+  constructor(private gs: GlobalService) {
+
   }
 
   ngOnInit(): void {
-    this.data.subscribe(models=>this.dataSource.data = models);
+    this.gs.getData().subscribe(models => this.dataSource.data = models);
   }
 
   hasChild = (_: number, node: Node) => node.expandable;
 
-  @Input()
-  data!: Observable<Model[]>;
-  @Output()
-  selectedModel: EventEmitter<Model> = new EventEmitter<Model>();
-  @Output()
-  newModelRequest: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  newModel() {
-    console.log("Adding new");
+
+  newModel(): void {
+    console.log('Adding new');
     this.newModelRequest.emit(true);
   }
 

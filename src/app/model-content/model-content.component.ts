@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs/internal/Subject';
 import { GlobalService } from '../global-service.service';
 import { Model } from '../tools/model.tool';
 
@@ -10,7 +11,7 @@ import { Model } from '../tools/model.tool';
 export class ModelContentComponent implements OnInit {
 
   isEditing!: boolean;
-  isNew = false;
+  isNew = new Subject<boolean>();
 
   constructor(private gs: GlobalService) { }
 
@@ -24,18 +25,13 @@ export class ModelContentComponent implements OnInit {
   }
 
   onModelSave(event: Model){
-    
-  }
-
-  onEdit(event: boolean){
-    this.isEditing = event;
-    console.log("IsEditing:",this.isEditing);
+    this.gs.add(event);
   }
 
   onNewModel(event: boolean) {
-    this.isNew = true;
+    this.isNew.next(event);
   }
 
-  
+
 
 }

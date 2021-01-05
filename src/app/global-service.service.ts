@@ -16,12 +16,12 @@ export class GlobalService {
 
 
   constructor(private route:Router) {  }
-  
+
   private selectedTool: Tool = tools.filter(tool=>tool.name==="Model")[0];
-  
-  
+
+
   getSelectedTool(): string {
-    
+
     return this.selectedTool.name;
   }
 
@@ -38,11 +38,13 @@ export class GlobalService {
   }
 
   getData(): Observable<any[]> {
+    console.log('Data: ', this.selectedTool.data.);
+
     return this.selectedTool.data.asObservable();
   }
 
   add(item: any){
-    this.selectedTool.data.next(item);
+    this.selectedTool.data.next([item]);
   }
 
 }
