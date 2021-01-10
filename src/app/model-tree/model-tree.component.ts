@@ -8,7 +8,7 @@ import { Model } from '../tools/model.tool';
 function transformer(model: Model, level: number): Node {
   return {
     expandable: !!model.properties && model.properties.length > 0,
-    name: model.name,
+    name: model.id.toString(),
     level,
   };
 }
@@ -25,6 +25,8 @@ export class ModelTreeComponent implements OnInit {
   @Output()
   newModelRequest: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Input()
+  models!: Observable<Model[]>;
   treeControl = new FlatTreeControl<Node>(node => node.level, node => node.expandable);
 
   treeFlattener = new MatTreeFlattener(transformer, node => node.level, node => node.expandable, node => node.properties);
@@ -37,7 +39,7 @@ export class ModelTreeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gs.getData().subscribe(models => this.dataSource.data = models);
+    this.models.subscribe(ms => this.dataSource.data = ms);
   }
 
   hasChild = (_: number, node: Node) => node.expandable;
@@ -47,6 +49,11 @@ export class ModelTreeComponent implements OnInit {
   newModel(): void {
     console.log('Adding new');
     this.newModelRequest.emit(true);
+  }
+
+  selectModel(model: Model): void {
+    console.log('Selecting: ', model);
+    this.selectedModel.emit(model);
   }
 
 }

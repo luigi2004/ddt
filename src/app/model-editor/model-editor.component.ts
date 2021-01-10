@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { GlobalService } from '../global-service.service';
 import { Model } from '../tools/model.tool';
+
+
 
 @Component({
   selector: 'app-model-editor',
@@ -31,9 +34,11 @@ export class ModelEditorComponent implements OnInit {
   }
 
   save(): void {
+
     if (this.name !== undefined) {
-      this.modelChange.emit({name: this.name, properties: []});
+      this.modelChange.emit({id: Guid.create(), name: this.name, properties: []});
       this.isEdit = false;
+      this.name = undefined;
     }
 
   }

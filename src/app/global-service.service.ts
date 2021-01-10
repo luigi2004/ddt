@@ -15,9 +15,9 @@ import { Observable } from 'rxjs';
 export class GlobalService {
 
 
-  constructor(private route:Router) {  }
+  constructor(private route: Router) {  }
 
-  private selectedTool: Tool = tools.filter(tool=>tool.name==="Model")[0];
+  private selectedTool: Tool = tools.filter(tool => tool.name === 'Model')[0];
 
 
   getSelectedTool(): string {
@@ -25,26 +25,30 @@ export class GlobalService {
     return this.selectedTool.name;
   }
 
-  setSelectedTool(name:string) {
-    this.selectedTool = tools.filter(tool=>tool.name===name)[0];
+  setSelectedTool(name: string): void {
+    this.selectedTool = tools.filter(tool => tool.name === name)[0];
   }
 
-  getActive(){
+  getActive(): Tool{
     return this.selectedTool.active;
   }
 
-  setActive(active: any){
+  setActive(active: any): void {
     this.selectedTool.active = active;
   }
 
-  getData(): Observable<any[]> {
-    console.log('Data: ', this.selectedTool.data.);
+  getData(): any[] {
+    console.log('Data: ', this.selectedTool.data);
 
-    return this.selectedTool.data.asObservable();
+    return this.selectedTool.data;
   }
 
-  add(item: any){
-    this.selectedTool.data.next([item]);
+  add(item: any): void {
+    // let items = [];
+    // this.selectedTool.data.subscribe(iter => items.push(iter));
+    // items.push(item);
+    this.selectedTool.data.push(item);
+
   }
 
 }

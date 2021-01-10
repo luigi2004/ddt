@@ -1,13 +1,12 @@
-import { Subject } from 'rxjs';
 import { Tool } from './tool';
 
 export interface ServiceDef{
-    name:string;
+    name: string;
 }
 
 export class ServiceTool implements Tool {
-    name: string = "Service";
+    name = 'Service';
     active: ServiceDef | undefined;
-    data = new Subject<ServiceDef[]>();
-    
+    data = [];
+
 }

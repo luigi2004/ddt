@@ -1,6 +1,6 @@
 <mat-sidenav-container>
     <mat-sidenav mode="side" opened>
-        <app-model-tree (selectedModel)="onModelSelected($event)" (newModelRequest)="onNewModel($event)"></app-model-tree>
+        <app-model-tree [models]="models.asObservable()" (selectedModel)="onModelSelected($event)" (newModelRequest)="onNewModel($event)"></app-model-tree>
     </mat-sidenav>
     <mat-sidenav-content>
         <app-model-editor [isNew]="isNew.asObservable()" (modelChange)="onModelSave($event)"></app-model-editor>
