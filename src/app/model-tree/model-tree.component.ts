@@ -1,12 +1,14 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { GlobalService } from '../global-service.service';
 import { Model } from '../tools/model.tool';
 
 function transformer(model: Model, level: number): Node {
   return {
+    id: model.id,
     expandable: !!model.properties && model.properties.length > 0,
     name: model.id.toString(),
     level,
@@ -56,10 +58,20 @@ export class ModelTreeComponent implements OnInit {
     this.selectedModel.emit(model);
   }
 
+  getModelName(id: string): string {
+    let model: Model = {name: 'not find please reload'} as Model;
+    this.models.subscribe(arr => {
+      let m = arr.find(m => m.id.toString() === id);
+      model = m ?? model;
+    });
+    return model.name;
+  }
+
 }
 
 interface Node {
   expandable: boolean;
+  id: Guid;
   name: string;
   level: number;
 }
