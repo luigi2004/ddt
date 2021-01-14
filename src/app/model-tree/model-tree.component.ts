@@ -10,10 +10,11 @@ function transformer(model: Model, level: number): Node {
   return {
     id: model.id,
     expandable: !!model.properties && model.properties.length > 0,
-    name: model.id.toString(),
+    name: model.name,
     level,
   };
 }
+
 @Component({
   selector: 'app-model-tree',
   templateUrl: './model-tree.component.html',
@@ -58,13 +59,19 @@ export class ModelTreeComponent implements OnInit {
     this.selectedModel.emit(model);
   }
 
-  getModelName(id: string): string {
-    let model: Model = {name: 'not find please reload'} as Model;
-    this.models.subscribe(arr => {
-      let m = arr.find(m => m.id.toString() === id);
-      model = m ?? model;
-    });
-    return model.name;
+  selectNode(node: Node): void {
+    console.log('Node: ', node);
+    const model = this.getModel(node.id);
+    if (model !== undefined){
+      this.selectModel(model);
+    }
+  }
+
+  getModel(id: Guid): Model | undefined {
+    console.log('Searching...');
+    const model = this.dataSource.data.find(m => m.id === id);
+    console.log('Found: ', model);
+    return model;
   }
 
 }

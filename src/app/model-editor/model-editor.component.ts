@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { GlobalService } from '../global-service.service';
-import { Model } from '../tools/model.tool';
+import { Model, ModelTool } from '../tools/model.tool';
 
 
 
@@ -15,12 +15,14 @@ export class ModelEditorComponent implements OnInit {
 
   @Input()
   isNew!: Observable<boolean>;
+  @Input()
+  model!: Model;
   @Output()
   modelChange: EventEmitter<Model> = new EventEmitter<Model>();
   @Output()
   editChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  name: string | undefined;
-  props: Model[] | undefined;
+  name = new  Subject<string>();
+  props = new Subject<Model[]>();
   isEdit = false;
 
 

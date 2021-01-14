@@ -30,11 +30,11 @@ export class GlobalService {
   }
 
   getActive(): Tool{
-    return this.selectedTool.active;
+    return this.selectedTool;
   }
 
   setActive(active: any): void {
-    this.selectedTool.active = active;
+    this.selectedTool = active;
   }
 
   getData(): any[] {

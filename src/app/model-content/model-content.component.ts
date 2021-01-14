@@ -14,6 +14,7 @@ export class ModelContentComponent implements OnInit {
   isEditing!: boolean;
   isNew = new Subject<boolean>();
   models = new Subject<Model[]>();
+  selected: Model | undefined;
 
   constructor(private gs: GlobalService) { }
 
@@ -22,7 +23,7 @@ export class ModelContentComponent implements OnInit {
   }
 
   onModelSelected(event: Model): void {
-    this.gs.setActive(event);
+    this.gs.getActive().active = event;
     console.log('Selected: ', event);
 
   }
