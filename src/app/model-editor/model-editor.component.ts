@@ -16,13 +16,13 @@ export class ModelEditorComponent implements OnInit {
   @Input()
   isNew!: Observable<boolean>;
   @Input()
-  model!: Model;
+  model!: Model | undefined;
   @Output()
   modelChange: EventEmitter<Model> = new EventEmitter<Model>();
   @Output()
   editChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  name = new  Subject<string>();
-  props = new Subject<Model[]>();
+  name: string | undefined;
+  props: Model[] | undefined;
   isEdit = false;
 
 
