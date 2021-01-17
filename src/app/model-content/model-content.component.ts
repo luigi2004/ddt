@@ -23,7 +23,7 @@ export class ModelContentComponent implements OnInit {
   }
 
   onModelSelected(event: Model): void {
-    this.gs.getActive().active = event;
+    this.gs.getActive().active.next(event);
     console.log('Selected: ', event);
 
   }

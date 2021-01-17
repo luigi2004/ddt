@@ -1,6 +1,7 @@
+import { Subject } from "rxjs";
 
 export interface Tool {
     name: string;
-    active: any;
+    active: Subject<any>;
     data: any[];
 }

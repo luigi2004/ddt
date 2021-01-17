@@ -15,8 +15,9 @@ export class ModelEditorComponent implements OnInit {
 
   @Input()
   isNew!: Observable<boolean>;
-  @Input()
-  model!: Model | undefined;
+
+  model!: Model;
+
   @Output()
   modelChange: EventEmitter<Model> = new EventEmitter<Model>();
   @Output()
@@ -25,7 +26,6 @@ export class ModelEditorComponent implements OnInit {
   props: Model[] | undefined;
   isEdit = false;
 
-
   constructor(private gs: GlobalService) { }
 
   ngOnInit(): void {
@@ -33,16 +33,17 @@ export class ModelEditorComponent implements OnInit {
       console.log('New item requested from boolean: ', event);
       this.isEdit ||= event;
     });
+    this.gs.getActive().active.subscribe(m => {
+      this.name = m.name;
+      this.props = m.properties;
+    });
   }
 
   save(): void {
-
     if (this.name !== undefined) {
       this.modelChange.emit({id: Guid.create(), name: this.name, properties: []});
       this.isEdit = false;
       this.name = undefined;
     }
-
   }
-
 }

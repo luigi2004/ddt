@@ -3,6 +3,6 @@
         <app-model-tree [models]="models.asObservable()" (selectedModel)="onModelSelected($event)" (newModelRequest)="onNewModel($event)"></app-model-tree>
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-model-editor [isNew]="isNew.asObservable()" [model]="selected" (modelChange)="onModelSave($event)"></app-model-editor>
+        <app-model-editor [isNew]="isNew.asObservable()" (modelChange)="onModelSave($event)"></app-model-editor>
     </mat-sidenav-content>
 </mat-sidenav-container>

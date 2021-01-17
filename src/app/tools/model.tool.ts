@@ -1,5 +1,6 @@
 import { Tool } from './tool';
 import { Guid } from "guid-typescript";
+import { Subject } from 'rxjs';
 
 
 export interface Model {
@@ -10,6 +11,6 @@ export interface Model {
 
 export class ModelTool implements Tool {
     name = 'Model';
-    active: Model | undefined;
+    active = new Subject<Model>();
     data = [];
 }
