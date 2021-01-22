@@ -44,11 +44,7 @@ export class GlobalService {
   }
 
   add(item: any): void {
-    // let items = [];
-    // this.selectedTool.data.subscribe(iter => items.push(iter));
-    // items.push(item);
     this.selectedTool.data.push(item);
-
   }
 
 }

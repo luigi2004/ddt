@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs/internal/Subject';
+import { Subject } from 'rxjs';
 import { GlobalService } from '../global-service.service';
 import { Model } from '../tools/model.tool';
 
@@ -30,12 +30,17 @@ export class ModelContentComponent implements OnInit {
 
   onModelSave(event: Model): void {
     console.log('Saving Model: ', event);
+    const data = this.gs.getData()
 
-    this.gs.add(event);
-    if (this.isNew) {
-      this.models.next(this.gs.getData());
-      return;
+    if (data.includes(event)) {
+      data.length = 0;
+    } else {
+      this.gs.add(event);
     }
+
+    this.models.next(this.gs.getData());
+    console.log("Saved: ",data);
+    
   }
 
   onNewModel(event: boolean): void {
