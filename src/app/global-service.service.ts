@@ -3,7 +3,7 @@ import { tools } from './tools/registered.tool';
 import { Model } from './tools/model.tool';
 import { ContextDef } from './tools/context.tool';
 import { ServiceDef } from './tools/service.tool';
-import { Tool } from './tools/tool';
+import { DataPoint, Tool } from './tools/tool';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -37,7 +37,7 @@ export class GlobalService {
     this.selectedTool = active;
   }
 
-  getData(): any[] {
+  getData(): DataPoint[] {
     console.log('Data: ', this.selectedTool.data);
 
     return this.selectedTool.data;

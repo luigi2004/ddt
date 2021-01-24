@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
-import { Tool } from './tool';
+import { DataPoint, Tool } from './tool';
 
-export interface ServiceDef{
+export interface ServiceDef extends DataPoint {
     name: string;
 }
 
@@ -9,5 +9,4 @@ export class ServiceTool implements Tool {
     name = 'Service';
     active = new Subject<ServiceDef>();
     data = [];
-
 }

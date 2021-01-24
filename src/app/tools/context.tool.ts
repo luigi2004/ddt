@@ -1,8 +1,8 @@
 import { Subject } from 'rxjs';
-import { Tool } from './tool';
+import { DataPoint, Tool } from './tool';
 
 
-export interface ContextDef{
+export interface ContextDef extends DataPoint {
     name: string;
 }
 

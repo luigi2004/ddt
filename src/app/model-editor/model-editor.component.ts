@@ -23,7 +23,7 @@ export class ModelEditorComponent implements OnInit {
   @Output()
   editChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   name: string | undefined;
-  props: Model[] | undefined;
+  props: Model[] = [];
   isEdit = false;
 
   constructor(private gs: GlobalService) { }
@@ -34,6 +34,7 @@ export class ModelEditorComponent implements OnInit {
       this.isEdit ||= event;
     });
     this.gs.getActive().active.subscribe(m => {
+      this.model = m;
       this.name = m.name;
       this.props = m.properties;
     });
@@ -41,7 +42,9 @@ export class ModelEditorComponent implements OnInit {
 
   save(): void {
     if (this.name !== undefined) {
-      this.modelChange.emit({id: Guid.create(), name: this.name, properties: []});
+      this.model.name = this.name;
+      this.model.properties = this.props;
+      this.modelChange.emit(this.model);
       this.isEdit = false;
       this.name = undefined;
     }

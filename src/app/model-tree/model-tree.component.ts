@@ -52,6 +52,7 @@ export class ModelTreeComponent implements OnInit {
   newModel(): void {
     console.log('Adding new');
     this.newModelRequest.emit(true);
+    this.selectedModel.emit({ id: Guid.create(), name: '', properties: []});
   }
 
   selectModel(model: Model): void {

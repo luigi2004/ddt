@@ -1,10 +1,8 @@
-import { Tool } from './tool';
-import { Guid } from "guid-typescript";
+import { DataPoint, Tool } from './tool';
 import { Subject } from 'rxjs';
 
 
-export interface Model {
-    id: Guid;
+export interface Model extends DataPoint {
     name: string;
     properties: Model[] | undefined;
 }

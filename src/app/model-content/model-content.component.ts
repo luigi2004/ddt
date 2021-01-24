@@ -19,28 +19,26 @@ export class ModelContentComponent implements OnInit {
   constructor(private gs: GlobalService) { }
 
   ngOnInit(): void {
-    this.models.next(this.gs.getData());
+    this.models.next(this.gs.getData() as Model[]);
   }
 
   onModelSelected(event: Model): void {
     this.gs.getActive().active.next(event);
     console.log('Selected: ', event);
-
   }
 
   onModelSave(event: Model): void {
     console.log('Saving Model: ', event);
-    const data = this.gs.getData()
+    const data = this.gs.getData();
 
     if (data.includes(event)) {
-      data.length = 0;
+      this.gs.getActive().data = data.map(i => (i.id.equals(event.id) ? event : i));
     } else {
       this.gs.add(event);
     }
 
-    this.models.next(this.gs.getData());
-    console.log("Saved: ",data);
-    
+    this.models.next(this.gs.getData() as Model[]);
+    console.log('Saved: ', data);
   }
 
   onNewModel(event: boolean): void {
