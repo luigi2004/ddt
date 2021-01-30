@@ -8,7 +8,12 @@
     </mat-form-field>
     <br>
     <mat-label>Properties:</mat-label>
-    <li *ngFor="let prop of props">{{prop.name}}</li>
+    <mat-form-field *ngFor="let prop of props">
+      <input matInput name="property" [(ngModel)]="prop.name">
+      <button>-</button>
+    </mat-form-field>
+    <br>
+    <button>+</button>
     <br>
     <button (click)="save()">Save</button>
 </ng-template>
