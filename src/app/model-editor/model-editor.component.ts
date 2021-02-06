@@ -40,6 +40,10 @@ export class ModelEditorComponent implements OnInit {
     });
   }
 
+  addProperty(): void {
+
+  }
+
   save(): void {
     if (this.name !== undefined) {
       this.model.name = this.name;
